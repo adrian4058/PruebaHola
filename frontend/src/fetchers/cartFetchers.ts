@@ -1,9 +1,10 @@
 import { Product } from "../types";
 import axios from "axios";
+import BACKEND_URL from "../utils";
 
 export async function fetchProducts(): Promise<Product[]> {
   try {
-    const res = await axios.get("http://localhost:5000/api/products");
+    const res = await axios.get(`${BACKEND_URL}/api/products`);
     return res.data;
   } catch (error: any) {
     alert("Error al obtener productos: " + (error?.message || error));
@@ -13,7 +14,7 @@ export async function fetchProducts(): Promise<Product[]> {
 
 export async function fetchCart(): Promise<Product[]> {
   try {
-    const res = await axios.get("http://localhost:5000/api/cart");
+    const res = await axios.get(`${BACKEND_URL}/api/cart`);
     return res.data;
   } catch (error: any) {
     alert("Error al obtener el carrito: " + (error?.message || error));
@@ -23,7 +24,7 @@ export async function fetchCart(): Promise<Product[]> {
 
 export async function addToCart(id: number): Promise<void> {
   try {
-    await axios.post("http://localhost:5000/api/cart", { id });
+    await axios.post(`${BACKEND_URL}/api/cart`, { id });
   } catch (error: any) {
     alert("Error al agregar al carrito: " + (error?.message || error));
     throw error;
@@ -32,7 +33,7 @@ export async function addToCart(id: number): Promise<void> {
 
 export async function removeFromCart(id: number): Promise<void> {
   try {
-    await axios.delete("http://localhost:5000/api/cart", { data: { id } });
+    await axios.delete(`${BACKEND_URL}/api/cart`, { data: { id } });
   } catch (error: any) {
     alert("Error al quitar del carrito: " + (error?.message || error));
     throw error;

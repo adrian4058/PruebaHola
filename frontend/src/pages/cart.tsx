@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { Product } from "../types";
+import { fetchCart } from "../fetchers/cartFetchers";
 
 export default function CartPage() {
   const [cart, setCart] = useState<Product[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/cart")
-      .then((res) => res.json())
-      .then((data) => setCart(data));
+    fetchCart().then(setCart);
   }, []);
 
   return (
